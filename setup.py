@@ -8,7 +8,7 @@ setup(
   author = 'Harvey Dumancic',
   author_email = 'dez.osk@gmail.com',
   url = 'https://github.com/Armitage87/smax',
-  download_url = 'https://github.com/user/reponame/archive/v_01.tar.gz',
+  download_url = 'https://github.com/Armitage87/smax/archive/0.1.tar.gz',
   keywords = ['SMAX', 'Service management automation x', 'micro focus', 'automation'],
   install_requires=[
           'requests'
