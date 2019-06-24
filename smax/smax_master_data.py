@@ -1,6 +1,8 @@
-import urllib.parse
-import requests
 import json
+import urllib.parse
+
+import requests
+
 from smax.smax_auth_wrapper import SmaxTenant
 
 
@@ -115,19 +117,33 @@ class MasterData(SmaxTenant):
                              cookies=self.get_cookie()).json()
         return query
 
-    def get_categories(self):
+    def get_categories(self, parent_category_id=None):
         """
         Get a list of categories
+        :param parent_category_id: ID of parent category if looking for subcategories, default is none
         :return: List of categories
         """
-        query = requests.get('{}/rest/{}/ems/ITProcessRecordCategory?filter=(Level1ParentId+%3D+null)&layout=Level2'
-                             'Parent,PhaseId,IsDeleted,DataDomains,Level1Parent,IsActive,ExplicitStakeholders,Name,'
-                             'DisplayLabel,AllStakeholders,Lifetime,Expire,Level1ParentId,LastUpdateTime,'
-                             'EmsCreationTime,Level2ParentId,Id,'
-                             'ProcessId&order=DisplayLabel+asc&size=1000'.format(self.base_url,
-                                                                                 self.tenant_id),
-                             cookies=self.get_cookie()).json()
-        return query
+        if parent_category_id:
+            query_with_id = requests.get(
+                '{}/rest/{}/ems/ITProcessRecordCategory?filter=(Level1ParentId+%3D+{})&layout=Level2'
+                'Parent,PhaseId,IsDeleted,DataDomains,Level1Parent,IsActive,ExplicitStakeholders,Name,'
+                'DisplayLabel,AllStakeholders,Lifetime,Expire,Level1ParentId,LastUpdateTime,'
+                'EmsCreationTime,Level2ParentId,Id,'
+                'ProcessId&order=DisplayLabel+asc&size=1000'.format(self.base_url,
+                                                                    self.tenant_id,
+                                                                    parent_category_id),
+                cookies=self.get_cookie()).json()
+            return query_with_id
+        else:
+            query = requests.get('{}/rest/{}/ems/ITProcessRecordCategory?filter=(Level1ParentId+%3D+null)&layout=Level2'
+                                 'Parent,PhaseId,IsDeleted,DataDomains,Level1Parent,IsActive,ExplicitStakeholders,Name,'
+                                 'DisplayLabel,AllStakeholders,Lifetime,Expire,Level1ParentId,LastUpdateTime,'
+                                 'EmsCreationTime,Level2ParentId,Id,'
+                                 'ProcessId&order=DisplayLabel+asc&size=1000'.format(self.base_url,
+                                                                                     self.tenant_id,
+                                                                                     parent_category_id),
+                                 cookies=self.get_cookie()).json()
+            return query
 
     def create_entity(self, entity_type, entity_payload):
         """
