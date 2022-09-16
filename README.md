@@ -45,7 +45,7 @@ there are alos several static methods acting as helpers
 #Example: get incidents by creation date;
 from smax import Run
 
-smax = Run(username='user.name@email.com',
+smax = Run(user_name='user.name@email.com',
            password='password',
            base_url='https://your.smax.instance.com',
            tenant_id=234324)
