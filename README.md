@@ -4,7 +4,7 @@ SMAX API package is full API wrapper around functionality of Micro Focus SMAX ap
 
   - Full support for tenant operations
   - Support of administration methods
-  - Full support of Suite Admin operation and maintenence
+  - Full support of Suite Admin operation and maintenance
 
 You can also:
   - Automate SMAX using this package
